@@ -13,12 +13,14 @@ import ProfileIcon from '@assets/icons/profile.svg';
 
 import TabIcon from '@components/TabIcon';
 import FavouriteScreen from '@features/favourites/screens/FavouriteScreen';
+import SearchScreen from '@features/search/screens/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
+     initialRouteName="Events"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#000',
@@ -29,7 +31,7 @@ const BottomTabNavigator = () => {
       }}>
       <Tab.Screen
         name="Search"
-        component={EventScreen}
+        component={SearchScreen}
         options={{
           tabBarIcon: ({color}) => (
             <TabIcon
