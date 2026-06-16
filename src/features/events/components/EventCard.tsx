@@ -1,18 +1,16 @@
 import React, {
   memo,
-  useEffect,
   useMemo,
-  useState,
 } from 'react';
+
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 
-import { Event } from '../types/event.types';
+import {Event} from '../types/event.types';
 
 import ArrowRightIcon from '@assets/icons/arrow-right.svg';
 import ShareIcon from '@assets/icons/share.svg';
@@ -20,10 +18,12 @@ import HeartIcon from '@assets/icons/heart.svg';
 import HeartOutlineIcon from '@assets/icons/heart-outline.svg';
 import ImagePlaceholderIcon from '@assets/icons/image-placeholder.svg';
 
-import { spacing } from '@theme/spacing';
-import { colors } from '@theme/colors';
-import { typography } from '@theme/typography';
-import { metrics } from '@theme/metrics';
+
+import {spacing} from '@theme/spacing';
+import {colors} from '@theme/colors';
+import {typography} from '@theme/typography';
+import {metrics} from '@theme/metrics';
+import AppImage from '@components/AppImages';
 
 type Props = {
   event: Event;
@@ -41,13 +41,6 @@ const EventCard = ({
   onFavoritePress,
   onSharePress,
 }: Props) => {
-  const [imageError, setImageError] =
-    useState(false);
-
-  useEffect(() => {
-    setImageError(false);
-  }, [event.event_profile_img]);
-
   const tags = useMemo(
     () =>
       [
@@ -59,38 +52,10 @@ const EventCard = ({
     [event.keywords, event.danceStyles],
   );
 
-  const FavoriteIcon = event.isFavorite
-    ? HeartIcon
-    : HeartOutlineIcon;
-
-  const renderImage = () => {
-    if (
-      imageError ||
-      !event.event_profile_img
-    ) {
-      return (
-        <View style={styles.placeholder}>
-          <ImagePlaceholderIcon
-            width={32}
-            height={32}
-          />
-        </View>
-      );
-    }
-
-    return (
-      <Image
-        source={{
-          uri: event.event_profile_img,
-        }}
-        style={styles.image}
-        resizeMode="cover"
-        onError={() =>
-          setImageError(true)
-        }
-      />
-    );
-  };
+  const FavoriteIcon =
+    event.isFavorite
+      ? HeartIcon
+      : HeartOutlineIcon;
 
   return (
     <TouchableOpacity
@@ -98,7 +63,23 @@ const EventCard = ({
       style={styles.card}
       onPress={onPress}>
       <View style={styles.imageContainer}>
-        {renderImage()}
+        <AppImage
+          imageName={
+            event.event_profile_img
+          }
+          size={IMAGE_SIZE}
+          placeholder={
+            <View
+              style={
+                styles.placeholder
+              }>
+              <ImagePlaceholderIcon
+                width={32}
+                height={32}
+              />
+            </View>
+          }
+        />
       </View>
 
       <View style={styles.content}>
@@ -112,47 +93,73 @@ const EventCard = ({
           <ArrowRightIcon
             width={22}
             height={22}
-            color={colors.textPrimary}
+            color={
+              colors.textPrimary
+            }
           />
         </View>
 
         <View style={styles.infoRow}>
           <View>
             <Text style={styles.date}>
-              {event.readable_from_date}
+              {
+                event.readable_from_date
+              }
             </Text>
 
-            <Text style={styles.price}>
-              €{event.event_price_from}
-              {event.event_price_to > 0 &&
+            <Text
+              style={styles.price}>
+              €
+              {
+                event.event_price_from
+              }
+              {event.event_price_to >
+                0 &&
                 ` - €${event.event_price_to}`}
             </Text>
           </View>
 
           <Text
             numberOfLines={2}
-            style={styles.location}>
-            {event.city}, {event.country}
+            style={
+              styles.location
+            }>
+            {event.city},{' '}
+            {event.country}
           </Text>
         </View>
 
-        <View style={styles.tagsContainer}>
-          {tags.map((tag, index) => (
-            <View
-              key={`${tag}-${index}`}
-              style={styles.tag}>
-              <Text
-                numberOfLines={1}
-                style={styles.tagText}>
-                {tag}
-              </Text>
-            </View>
-          ))}
+        <View
+          style={
+            styles.tagsContainer
+          }>
+          {tags.map(
+            (tag, index) => (
+              <View
+                key={`${tag}-${index}`}
+                style={
+                  styles.tag
+                }>
+                <Text
+                  numberOfLines={
+                    1
+                  }
+                  style={
+                    styles.tagText
+                  }>
+                  {tag}
+                </Text>
+              </View>
+            ),
+          )}
         </View>
 
-        <View style={styles.actions}>
+        <View
+          style={styles.actions}>
           <TouchableOpacity
-            onPress={onSharePress}
+            onPress={
+              onSharePress
+            }
             hitSlop={{
               top: 10,
               bottom: 10,
@@ -167,7 +174,9 @@ const EventCard = ({
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={onFavoritePress}
+            onPress={
+              onFavoritePress
+            }
             hitSlop={{
               top: 10,
               bottom: 10,
@@ -175,8 +184,12 @@ const EventCard = ({
               right: 10,
             }}>
             <FavoriteIcon
-              width={ICON_SIZE}
-              height={ICON_SIZE}
+              width={
+                ICON_SIZE
+              }
+              height={
+                ICON_SIZE
+              }
               color="#16C784"
             />
           </TouchableOpacity>
@@ -191,13 +204,18 @@ export default memo(EventCard);
 const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
-    backgroundColor: colors.white,
-    borderRadius: metrics.radius.lg,
+    backgroundColor:
+      colors.white,
+    borderRadius:
+      metrics.radius.lg,
     padding: spacing.sm + 2,
-    marginHorizontal: spacing.sm + 4,
-    marginVertical: spacing.xs + 2,
+    marginHorizontal:
+      spacing.sm + 4,
+    marginVertical:
+      spacing.xs + 2,
 
-    shadowColor: colors.black,
+    shadowColor:
+      colors.black,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -217,11 +235,6 @@ const styles = StyleSheet.create({
       colors.background,
   },
 
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-
   placeholder: {
     flex: 1,
     justifyContent: 'center',
@@ -232,58 +245,73 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 1,
-    marginLeft: spacing.sm + 2,
+    marginLeft:
+      spacing.sm + 2,
   },
 
   topRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    justifyContent:
+      'space-between',
   },
 
   title: {
     flex: 1,
-    marginRight: spacing.sm,
+    marginRight:
+      spacing.sm,
     fontSize:
-      typography.size.body + 2,
+      typography.size.body +
+      2,
     fontWeight:
-      typography.weight.semiBold,
-    color: colors.textPrimary,
+      typography.weight
+        .semiBold,
+    color:
+      colors.textPrimary,
   },
 
   infoRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: spacing.xs,
+    justifyContent:
+      'space-between',
+    marginTop:
+      spacing.xs,
   },
 
   date: {
     fontSize:
-      typography.size.caption + 1,
+      typography.size
+        .caption + 1,
     color: colors.primary,
     fontWeight:
-      typography.weight.medium,
+      typography.weight
+        .medium,
   },
 
   price: {
     marginTop: 2,
     fontSize:
-      typography.size.caption + 1,
-    color: colors.textSecondary,
+      typography.size
+        .caption + 1,
+    color:
+      colors.textSecondary,
   },
 
   location: {
     width: 90,
     textAlign: 'right',
     fontSize:
-      typography.size.caption,
-    color: colors.textSecondary,
+      typography.size
+        .caption,
+    color:
+      colors.textSecondary,
   },
 
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: spacing.sm,
+    marginTop:
+      spacing.sm,
   },
 
   tag: {
@@ -292,25 +320,32 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal:
       spacing.sm + 2,
-    paddingVertical: spacing.xs,
+    paddingVertical:
+      spacing.xs,
     marginRight:
       spacing.xs + 2,
-    marginBottom: spacing.xs,
+    marginBottom:
+      spacing.xs,
   },
 
   tagText: {
     fontSize:
-      typography.size.caption,
-    color: colors.textPrimary,
+      typography.size
+        .caption,
+    color:
+      colors.textPrimary,
     fontWeight:
-      typography.weight.medium,
+      typography.weight
+        .medium,
   },
 
   actions: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent:
+      'flex-end',
     alignItems: 'center',
     gap: spacing.md - 2,
-    marginTop: spacing.xs + 2,
+    marginTop:
+      spacing.xs + 2,
   },
 });
