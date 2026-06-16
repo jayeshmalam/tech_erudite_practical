@@ -5,10 +5,10 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import {colors} from '../../../theme/colors';
-import {metrics} from '../../../theme/metrics';
-import {typography} from '../../../theme/typography';
-import { spacing } from '../../../theme/spacing';
+import {colors} from '@theme/colors';
+import {metrics} from '@theme/metrics';
+import {typography} from '@theme/typography';
+import { spacing } from '@theme/spacing';
 
 type Props = {
   title: string;

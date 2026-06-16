@@ -29,7 +29,6 @@ const initialState: AuthState = {
   token: null,
   isLoading: false,
   error: null,
-  isGuest: false,
 };
 
 const authSlice = createSlice({
@@ -40,12 +39,8 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.error = null;
-      state.isGuest = false;
     },
 
-    enterAsGuest: state => {
-      state.isGuest = true;
-    },
   },
   extraReducers: builder => {
     builder
@@ -69,7 +64,6 @@ const authSlice = createSlice({
 
 export const {
   logout,
-  enterAsGuest,
 } = authSlice.actions;
 
 export default authSlice.reducer;

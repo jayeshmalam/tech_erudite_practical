@@ -8,10 +8,10 @@ import {
   TextInputProps,
 } from 'react-native';
 
-import {colors} from '../../../theme/colors';
-import {metrics} from '../../../theme/metrics';
-import {spacing} from '../../../theme/spacing';
-import {typography} from '../../../theme/typography';
+import {colors} from '@theme/colors';
+import {metrics} from '@theme/metrics';
+import {spacing} from '@theme/spacing';
+import {typography} from '@theme/typography';
 
 type Props = TextInputProps & {
   label: string;

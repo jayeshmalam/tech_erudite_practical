@@ -3,21 +3,21 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 
-import LoginScreen from '../../features/auth/screens/LoginScreen';
-import {useAppSelector} from '../../hooks/redux';
-import EventScreen from '../../features/events/screens/EventScreen';
+import LoginScreen from '@features/auth/screens/LoginScreen';
+import {useAppSelector} from '@hooks/redux';
+import EventScreen from '@features/events/screens/EventScreen';
 
 const Stack =
   createNativeStackNavigator();
 
 const RootNavigator = () => {
- const {token, isGuest} = useAppSelector(
+ const {token} = useAppSelector(
   state => state.auth,
 );
 
 return (
   <Stack.Navigator>
-    {!token && !isGuest ? (
+    {!token ? (
       <Stack.Screen
         name="Login"
         component={LoginScreen}
