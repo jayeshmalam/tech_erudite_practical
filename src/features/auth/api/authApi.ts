@@ -1,4 +1,4 @@
-import { api } from '../../../services/api';
+import { api } from '@services/api';
 import { LoginResponse } from '../types/auth.types';
 
 export const loginApi = async (

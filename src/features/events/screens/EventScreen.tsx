@@ -1,34 +1,82 @@
 import React from 'react';
 import {
   View,
+  FlatList,
+  ActivityIndicator,
   Text,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
-import {useAppDispatch} from '../../../hooks/redux';
-import {logout} from '../../auth/authSlice';
+import EventCard from '../components/EventCard';
+import { useEvents } from '../hooks/useEvents';
+import { Event } from '../types/event.types';
+import AppHeader from '@components/AppHeader';
+import { STRINGS } from '@constants/strings';
+
+import { colors } from '@theme/colors';
+import { spacing } from '@theme/spacing';
+
+const EmptyEvents = () => (
+  <View style={styles.center}>
+    <Text style={styles.messageText}>
+      {STRINGS.EVENTS.NO_EVENTS_FOUND}
+    </Text>
+  </View>
+);
 
 const EventScreen = () => {
-  const dispatch = useAppDispatch();
+  const { events, isLoading, error } = useEvents();
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <AppHeader />
+        <View style={styles.center}>
+          <ActivityIndicator
+            size="large"
+            color={colors.primary}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <AppHeader />
+        <View style={styles.center}>
+          <Text style={styles.errorText}>
+            {error}
+          </Text>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Event Screen
-      </Text>
+      <AppHeader />
 
-      <TouchableOpacity
-        style={styles.logoutButton}
-        onPress={handleLogout}>
-        <Text style={styles.logoutText}>
-          Logout
-        </Text>
-      </TouchableOpacity>
+      <FlatList
+        data={events}
+        renderItem={({ item }: { item: Event }) => (
+          <EventCard event={item} />
+        )}
+        keyExtractor={(item: Event) =>
+          String(
+            item.event_date_id ??
+              item.event_id,
+          )
+        }
+        contentContainerStyle={
+          styles.listContainer
+        }
+        showsVerticalScrollIndicator={
+          false
+        }
+        ListEmptyComponent={<EmptyEvents />}
+      />
     </View>
   );
 };
@@ -38,25 +86,29 @@ export default EventScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  listContainer: {
+    padding: spacing.md,
+    paddingBottom: spacing.xl,
+    flexGrow: 1,
+  },
+
+  center: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: spacing.md,
   },
 
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginBottom: 20,
+  messageText: {
+    color: colors.textSecondary,
+    textAlign: 'center',
   },
 
-  logoutButton: {
-    backgroundColor: '#FF3B30',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 8,
-  },
-
-  logoutText: {
-    color: '#FFF',
-    fontWeight: '600',
+  errorText: {
+    color: colors.error,
+    textAlign: 'center',
   },
 });

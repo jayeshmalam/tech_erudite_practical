@@ -1,4 +1,14 @@
 export const STRINGS = {
+   HEADER: {
+    LOGOUT_TITLE: 'Logout',
+    LOGOUT_MESSAGE: 'Are you sure you want to logout?',
+    CANCEL: 'Cancel',
+    LOGOUT: 'Logout',
+    HELLO: 'Hello',
+    GUEST: 'Guest',
+    SUBTITLE: 'Are you ready to dance?',
+  },
+
   LOGIN: {
     EMAIL_LABEL: 'Email',
     EMAIL_PLACEHOLDER: 'email@email.com',
@@ -29,8 +39,12 @@ export const STRINGS = {
     PASSWORD_MIN_LENGTH:
       'Password must be at least 6 characters',
   },
-
+  EVENTS: {
+    NO_EVENTS_FOUND: 'No Events Found',
+    LOADING: 'Loading...',
+  },
   API: {
     DEFAULT_ERROR: 'Something went wrong',
+    AUTHENTICATION_TOKEN_NOT_FOUND: 'Authentication token not found'
   },
 };

@@ -1,8 +1,8 @@
 import React, {memo} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 
-import {colors} from '../../../theme/colors';
-import {metrics} from '../../../theme/metrics';
+import {colors} from '@theme/colors';
+import {metrics} from '@theme/metrics';
 
 type Props = {
   icon: React.ComponentType<any>;

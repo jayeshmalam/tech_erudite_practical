@@ -13,17 +13,17 @@ import AuthInput from '../components/AuthInput';
 import LoginButton from '../components/LoginButton';
 import SocialButton from '../components/SocialButton';
 
-import GoogleIcon from '../../../assets/icons/social_media/google-icon.svg';
-import AppleIcon from '../../../assets/icons/social_media/apple-icon.svg';
-import FacebookIcon from '../../../assets/icons/social_media/facebook-icon.svg';
-import EyeIcon from '../../../assets/icons/eye-icon.svg';
-import EyeOffIcon from '../../../assets/icons/eye-off-icon.svg';
+import GoogleIcon from '@assets/icons/social_media/google-icon.svg';
+import AppleIcon from '@assets/icons/social_media/apple-icon.svg';
+import FacebookIcon from '@assets/icons/social_media/facebook-icon.svg';
+import EyeIcon from '@assets/icons/eye-icon.svg';
+import EyeOffIcon from '@assets/icons/eye-off-icon.svg';
 
-import { spacing } from '../../../theme/spacing';
-import { typography } from '../../../theme/typography';
-import { colors } from '../../../theme/colors';
+import { spacing } from '@theme/spacing';
+import { typography } from '@theme/typography';
+import { colors } from '@theme/colors';
 
-import { STRINGS } from '../../../constants/strings';
+import { STRINGS } from '@constants/strings';
 import { useLogin } from '../hooks/useLogin';
 
 const SOCIAL_ICONS = [
@@ -51,7 +51,6 @@ const LoginScreen = () => {
     handlePasswordChange,
     handleLogin,
     togglePasswordVisibility,
-    handleGuestLogin
   } = useLogin();
 
   const passwordIcon = secure ? (
@@ -139,7 +138,7 @@ const LoginScreen = () => {
 
           <TouchableOpacity
             style={styles.guestContainer}
-            onPress={handleGuestLogin}>
+            onPress={()=>{}}>
             <Text style={styles.guestText}>
               {STRINGS.LOGIN.ENTER_AS_GUEST}
             </Text>

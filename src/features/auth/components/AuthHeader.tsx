@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import AppIcon from '../../../assets/icons/app-icon.svg';
-import Placeholder from '../../../assets/icons/image-placeholder.svg';
+import AppIcon from '@assets/icons/app-icon.svg';
+import Placeholder from '@assets/icons/image-placeholder.svg';
 
-import {colors} from '../../../theme/colors';
-import {spacing} from '../../../theme/spacing';
+import {colors} from '@theme/colors';
+import {spacing} from '@theme/spacing';
 
 const AuthHeader = () => {
   return (

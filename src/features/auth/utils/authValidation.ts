@@ -1,4 +1,4 @@
-import { STRINGS } from "../../../constants/strings";
+import { STRINGS } from "@constants/strings";
 
 export interface LoginErrors {
   email?: string;

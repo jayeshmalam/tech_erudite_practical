@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import Toast from 'react-native-toast-message';
 
-import { useAppDispatch } from '../../../hooks/redux';
-import { enterAsGuest, loginUser } from '../authSlice';
+import { useAppDispatch } from '@hooks/redux';
+import {  loginUser } from '../authSlice';
 import { validateLogin } from '../utils/authValidation';
-import { STRINGS } from '../../../constants/strings';
+import { STRINGS } from '@constants/strings';
 
 const INITIAL_ERRORS = {
   email: '',
@@ -85,9 +85,6 @@ export const useLogin = () => {
     }
   }, [dispatch, email, password]);
 
-  const handleGuestLogin = () => {
-    dispatch(enterAsGuest());
-  };
   return {
     email,
     password,
@@ -97,6 +94,5 @@ export const useLogin = () => {
     handlePasswordChange,
     handleLogin,
     togglePasswordVisibility,
-    handleGuestLogin,
   };
 };
