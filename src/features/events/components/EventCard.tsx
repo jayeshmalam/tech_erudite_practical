@@ -27,11 +27,11 @@ import AppImage from '@components/AppImages';
 
 type Props = {
   event: Event;
+  isFavorite?: boolean;
   onPress?: () => void;
   onFavoritePress?: () => void;
   onSharePress?: () => void;
 };
-
 const IMAGE_SIZE = 86;
 const ICON_SIZE = 24;
 
@@ -40,6 +40,7 @@ const EventCard = ({
   onPress,
   onFavoritePress,
   onSharePress,
+  isFavorite = false,
 }: Props) => {
   const tags = useMemo(
     () =>
@@ -52,10 +53,9 @@ const EventCard = ({
     [event.keywords, event.danceStyles],
   );
 
-  const FavoriteIcon =
-    event.isFavorite
-      ? HeartIcon
-      : HeartOutlineIcon;
+const FavoriteIcon = isFavorite
+  ? HeartIcon
+  : HeartOutlineIcon;
 
   return (
     <TouchableOpacity

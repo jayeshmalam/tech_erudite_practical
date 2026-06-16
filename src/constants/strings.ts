@@ -45,6 +45,7 @@ export const STRINGS = {
   },
   API: {
     DEFAULT_ERROR: 'Something went wrong',
-    AUTHENTICATION_TOKEN_NOT_FOUND: 'Authentication token not found'
+    AUTHENTICATION_TOKEN_NOT_FOUND: 'Authentication token not found',
+    NO_FAVOURITES_FOUND: 'No favourites found'
   },
 };
